@@ -21,11 +21,15 @@ Here you'll find custom styles to personalize your experience with cute, dark, o
 
 ## 📦 Usage
 
-Add your preferred theme using `@import` in your **custom CSS settings** (e.g., in Misskey/Sharkey): for yandere
+Add your preferred theme using `@import` in your **custom CSS settings** (e.g., in Misskey/Sharkey):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/KDA-sparkle/css.astolfo.fedi.agency/yandere.css");
-````
+/* Astolfo Theme */
+@import url("https://cdn.jsdelivr.net/gh/KDA-sparkle/css.astolfo.fedi.agency/astolfo.css");
+
+/* Yandere Theme */
+@import url("https://cdn.jsdelivr.net/gh/KDA-sparkle/css.yandere.fedi.agency/yandere.css");
+```
 
 > Make sure to only use **one theme at a time** to avoid style conflicts.
 
