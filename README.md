@@ -1,39 +1,63 @@
-# Astolfo CSS Theme 🎀
+# 🎀 CSS Themes for fedi.catboy.agency
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/KDA-sparkle/css.astolfo.fedi.agency)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/issues)
-[![GitHub forks](https://img.shields.io/github/forks/KDA-sparkle/css.astolfo.fedi.agency)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/network)
-[![GitHub stars](https://img.shields.io/github/stars/KDA-sparkle/css.astolfo.fedi.agency)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/stargazers)
-[![GitHub last commit](https://img.shields.io/github/last-commit/KDA-sparkle/css.astolfo.fedi.agency)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/commits/main)
+[![License: MIT](https://img.shields.io/badge/License-MIT-pink.svg)](LICENSE)
+[![Status: Active](https://img.shields.io/badge/status-active-ff69b4.svg)](https://fedi.catboy.agency)
+[![Astolfo Theme](https://img.shields.io/badge/theme-astolfo-ffb3d4)](https://github.com/KDA-sparkle/css.astolfo.fedi.agency)
+[![Yandere Theme](https://img.shields.io/badge/theme-yandere-e03a7e)](https://github.com/KDA-sparkle/css.yandere.fedi.agency)
 
-Welcome to the **Astolfo CSS Theme**! 🌟 This theme is a custom CSS design inspired by the popular character Astolfo. It's not a massive CSS framework, but I found it cute and wanted to share it with everyone.
+Welcome to the **official CSS theme collection** for the instance [fedi.catboy.agency](https://fedi.catboy.agency) 🌸  
+Here you'll find custom styles to personalize your experience with cute, dark, or animated visuals!
 
-## Features ✨
-- **Custom Colors**: A beautiful blend of vibrant and pastel colors inspired by Astolfo.
-- **OLED Black Background**: Perfect for dark mode lovers with a full black OLED background.
-- **Multicolor Gradient Text**: Pseudo elements like usernames and mentions are animated with a rainbow gradient.
-- **Responsive Design**: The theme adjusts seamlessly across different screen sizes.
+---
 
-## Installation 🛠️
-To use this CSS theme in your project, simply copy and paste the following code into your CSS file:
+## 🎨 Available Themes
 
-https://github.com/KDA-sparkle/css.astolfo.fedi.agency/blob/main/style.css
+| Theme    | Preview | Description |
+|----------|---------|-------------|
+| **Astolfo** | 🖤 OLED black + pastel | A vibrant dark theme inspired by Astolfo, with rainbow pseudo effects. |
+| **Yandere** | 💗 Pink/Violet animated | A soft, glowing animated theme with yandere aesthetic and modern shadows. |
 
-## Preview 📸
-![Capture d'écran 2024-08-21 221838](https://github.com/user-attachments/assets/cf9c2847-9a3a-4ea8-97c6-e186b716d9e6)
+---
 
-## Usage ⚙️
-This theme is perfect for:
-- Personal blogs
-- Portfolio websites
-- Discord themes
-- And any project where you want to add a touch of Astolfo's charm!
+## 📦 Usage
 
-## Contributing 🤝
-Feel free to contribute to this project! Whether it's reporting a bug, suggesting a feature, or submitting a pull request, all contributions are welcome.
+Add your preferred theme using `@import` in your **custom CSS settings** (e.g., in Misskey/Sharkey):
 
-## License 📄
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/KDA-sparkle/css.astolfo.fedi.agency/blob/main/LICENSE) file for details.
+```css
+@import url("https://cdn.jsdelivr.net/gh/KDA-sparkle/css.astolfo.fedi.agency/style.css");
+````
 
-## Acknowledgements 💖
-Special thanks to the open-source community for their incredible work, and to all the Astolfo fans out there!
+> Make sure to only use **one theme at a time** to avoid style conflicts.
+
+---
+
+## 🧪 Compatibility
+
+✅ Works on:
+
+* Sharkey / Misskey frontend
+* Compatible browsers (Firefox, Chromium, Safari, etc.)
+
+❌ Not tested on:
+
+* Mastodon (but may partially work)
+* Glitch-soc forks
+
+---
+
+## 🛠️ Contributing
+
+Have an idea for a new theme or improvements?
+Feel free to open issues, submit pull requests, or suggest new color palettes!
+
+---
+
+## 📄 License
+
+All themes are released under the **MIT License**.
+Feel free to use, share, remix – just credit the author when you do.
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 💖 Made with love by [@Sparkle](https://github.com/KDA-sparkle)
