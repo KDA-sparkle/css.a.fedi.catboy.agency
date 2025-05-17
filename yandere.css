@@ -1,0 +1,759 @@
+@charset "utf-8";
+
+/*
+  Yandere Theme for Sharkey/Misskey
+  ---------------------------------
+  - Modern, soft, pink/violet animated theme
+  - 100% compatible with Misskey/Sharkey (uses only theme variables and safe overrides)
+  - All sections are commented for easy customization
+*/
+
+/* =====================
+   1. THEME VARIABLES
+   ===================== */
+:root {
+  /* Main palette */
+  --MI_THEME-accent: #e03a7e !important; /* Main pink accent */
+  --MI_THEME-accentedBg: rgba(224, 58, 126, 0.10) !important; /* Soft pink background for accents */
+  --MI_THEME-buttonGradateA: #2a183a !important; /* Button gradient start (dark violet) */
+  --MI_THEME-buttonGradateB: #2a183a !important; /* Button gradient end (dark violet) */
+  --MI_THEME-fgOnAccent: #fff0f6 !important; /* Text on accent backgrounds */
+  --MI_THEME-panel: #23142e !important; /* Panel background */
+  --MI_THEME-popup: #2a183a !important; /* Popup background */
+  --MI_THEME-bg: #1a1023 !important; /* Main background */
+  --MI_THEME-navBg: #18101e !important; /* Sidebar & SVG background */
+  --MI_THEME-navFg: #ffe4ec !important; /* Sidebar text */
+  --MI_THEME-navActive: #e03a7e !important; /* Active sidebar text */
+  --MI_THEME-link: #ff4f9d !important; /* Link color */
+  --MI_THEME-divider: #e03a7e33 !important; /* Divider color */
+  --MI_THEME-shadow: 0 2px 12px 0 rgba(224,58,126,0.10) !important; /* Soft shadow */
+  --MI_THEME-focus: #ffb3c6 !important; /* Focus color */
+  --MI_THEME-error: #ff4f9d !important; /* Error color */
+  --MI_THEME-indicator: #e03a7e !important; /* Indicator color */
+  --MI_THEME-modalBg: rgba(42,0,42,0.7) !important; /* Modal background */
+  --MI_THEME-buttonBg: #2a183a !important; /* Button background (default) */
+  --MI_THEME-buttonHoverBg: linear-gradient(90deg, #e03a7e, #ffb3d9) !important; /* Button hover gradient */
+  --MI_THEME-panelHeaderBg: #2a183a !important; /* Panel header background */
+  --MI_THEME-panelHeaderFg: #ffe4ec !important; /* Panel header text */
+  --MI_THEME-inputBorder: #e03a7e !important; /* Input border color */
+  --MI_THEME-panelBorder: 1.5px solid #e03a7e !important; /* Panel border */
+  --MI-radius: 16px !important; /* Main border radius */
+  --MI-radius-ellipse: 32px !important; /* Elliptical border radius */
+  --MI-radius-full: 9999px !important; /* Full border radius */
+  --MI-margin: 18px !important; /* Main margin */
+  --MI-marginHalf: 9px !important; /* Half margin */
+}
+
+/* =====================
+   2. GLOBAL EFFECTS
+   ===================== */
+
+/* Links */
+a, a:visited {
+  color: var(--MI_THEME-link) !important;
+  text-decoration: none !important;
+  transition: color 0.2s, text-shadow 0.2s !important;
+}
+a:hover {
+  color: var(--MI_THEME-accent) !important;
+  text-shadow: 0 0 12px var(--MI_THEME-accent), 0 0 2px #fff !important;
+  text-decoration: underline !important;
+}
+
+/* Dividers */
+hr {
+  margin: var(--MI-margin) 0 !important;
+  border: none !important;
+  height: 1.5px !important;
+  background: var(--MI_THEME-divider) !important;
+}
+
+/* Animated gradient for usernames, mentions, etc. */
+.username, .mention, .sparkle, .fedi-catboy-agency, .email {
+  background: linear-gradient(90deg, #ffb3d9, #e03a7e, #b8004f, #fff0f6, #ffb3d9);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yandere-multicolor 3s linear infinite;
+  font-weight: bold !important;
+}
+@keyframes yandere-multicolor {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Custom scrollbar */
+* {
+  scrollbar-color: var(--MI_THEME-accent) var(--MI_THEME-bg) !important;
+  scrollbar-width: thin !important;
+}
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--MI_THEME-accent) !important;
+  border-radius: 6px !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--MI_THEME-buttonGradateB) !important;
+}
+
+/* Glow effect for titles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--MI_THEME-accent) !important;
+  text-shadow: 0 0 16px var(--MI_THEME-accent), 0 0 2px #fff !important;
+  letter-spacing: 1px !important;
+}
+
+/* =====================
+   3. IMAGES & AVATARS
+   ===================== */
+img, .avatar, .pdp, .user-avatar, .icon, svg {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* =====================
+   4. INPUTS & TEXTAREAS
+   ===================== */
+input, textarea, select, option {
+  background: var(--MI_THEME-panel) !important;
+  color: var(--MI_THEME-navFg) !important;
+  border: 1.5px solid var(--MI_THEME-inputBorder) !important;
+  border-radius: var(--MI-radius) !important;
+  box-shadow: none !important;
+  transition: border 0.2s !important;
+}
+input:focus, textarea:focus, select:focus {
+  border: 1.5px solid var(--MI_THEME-accent) !important;
+  outline: none !important;
+}
+
+/* =====================
+   5. PANEL & CARD EFFECTS
+   ===================== */
+.panel, .card, .box, .glass, .glass-panel, .glass-box, .menu, .popup, .dropdown, .modal {
+  animation: fadeInYandere 0.7s cubic-bezier(.4,2,.6,1) both;
+  box-shadow: 0 4px 24px 0 var(--MI_THEME-shadow) !important;
+  border-radius: var(--MI-radius) !important;
+  background: rgba(255,255,255,0.01); /* Subtle glass effect */
+}
+@keyframes fadeInYandere {
+  0% { opacity: 0; transform: translateY(24px) scale(0.98); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* =====================
+   6. SIDEBAR / NAVBAR MENU
+   ===================== */
+/* Sidebar background and text */
+:root {
+  --MI_THEME-navBg: #18101e !important;
+  --MI_THEME-navFg: #ffe4ec !important;
+  --MI_THEME-navActive: #e03a7e !important;
+}
+
+/* Sidebar menu items (inactive, hover, active) */
+.navbar-item-6KaV, .navbar-active-7vS5, ._button.navbar-item-6KaV {
+  background: rgba(36, 20, 46, 0.85) !important; /* Inactive: dark violet */
+  color: var(--MI_THEME-navFg) !important;
+  border-radius: var(--MI-radius-ellipse) !important;
+  font-weight: bold !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin-bottom: 6px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.navbar-item-6KaV:not(.navbar-active-7vS5):not(:hover):not(:active) {
+  background: rgba(36, 20, 46, 0.85) !important;
+  color: var(--MI_THEME-navFg) !important;
+}
+
+.navbar-item-6KaV:hover, ._button.navbar-item-6KaV:hover {
+  background: #2a183a !important; /* Hover: lighter violet */
+  color: #fff0f6 !important;
+  box-shadow: 0 2px 8px 0 #e03a7e33 !important;
+}
+
+.navbar-active-7vS5 {
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9) !important; /* Active: pink gradient */
+  color: #fff0f6 !important;
+  border: 2px solid #e03a7e !important;
+  box-shadow: 0 0 8px #e03a7e33 !important;
+}
+
+.navbar-active-7vS5 * {
+  color: #fff0f6 !important;
+}
+
+.navbar-itemIcon-riyS {
+  color: #fff0f6 !important;
+  opacity: 0.9;
+}
+
+/* =====================
+   7. ANIMATED USERNAME & DOMAIN
+   ===================== */
+[data-v-266c9789] > span:first-child {
+  /* Animated gradient for username */
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9, #e03a7e, #b8004f);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yandere-username-gradient 3s linear infinite;
+  font-weight: bold;
+}
+[data-v-266c9789] > span:last-child {
+  /* Animated gradient for domain */
+  background: linear-gradient(90deg, #b8004f, #ffb3d9, #e03a7e, #ffb3d9);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yandere-domain-gradient 4s linear infinite;
+  font-weight: normal;
+  opacity: 0.7;
+}
+@keyframes yandere-username-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes yandere-domain-gradient {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =====================
+   8. HEART EFFECT (OPTIONAL)
+   ===================== */
+body.hearts-active .heart-cursor {
+  display: block;
+}
+.heart-cursor {
+  position: absolute;
+  width: 24px; height: 24px;
+  background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+  pointer-events: none;
+  animation: pop 1s forwards;
+  z-index: 9999;
+  display: none;
+}
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* =====================
+   9. CLEANUP / OVERRIDES
+   ===================== */
+/* Remove conflicting backgrounds, borders, and shadows from old rules */
+[class*="navbar-"],
+[class*="navbar-"].active,
+[class*="navbar-"]:hover,
+[class*="navbar-"]:active,
+[class*="navbar-"]:focus,
+[class*="navbar-"]:disabled,
+[class*="navbar-"]::before,
+[class*="navbar-"].active::before,
+[class*="navbar-"]:hover::before,
+[class*="navbar-"]:active::before,
+[class*="navbar-"]:focus::before,
+[class*="navbar-"]:disabled::before {
+  background: unset !important;
+  box-shadow: unset !important;
+  border: unset !important;
+  content: unset !important;
+}
+
+/* Effets doux et modernes (liens, titres, scrollbars, pseudos) */
+a, a:visited {
+  color: var(--MI_THEME-link) !important;
+  text-decoration: none !important;
+  transition: color 0.2s, text-shadow 0.2s !important;
+}
+a:hover {
+  color: var(--MI_THEME-accent) !important;
+  text-shadow: 0 0 12px var(--MI_THEME-accent), 0 0 2px #fff !important;
+  text-decoration: underline !important;
+}
+
+hr {
+  margin: var(--MI-margin) 0 !important;
+  border: none !important;
+  height: 1.5px !important;
+  background: var(--MI_THEME-divider) !important;
+}
+
+.username, .mention, .sparkle, .fedi-catboy-agency, .email {
+  background: linear-gradient(90deg, #ffb3d9, #e03a7e, #b8004f, #fff0f6, #ffb3d9);
+  -webkit-background-clip: text;
+  color: transparent !important;
+  font-weight: bold !important;
+  animation: yandere-multicolor 3s infinite alternate;
+}
+@keyframes yandere-multicolor {
+  0% { color: #ffb3d9; }
+  25% { color: #e03a7e; }
+  50% { color: #b8004f; }
+  75% { color: #fff0f6; }
+  100% { color: #ffb3d9; }
+}
+
+/* Scrollbar personnalisée */
+* {
+  scrollbar-color: var(--MI_THEME-accent) var(--MI_THEME-bg) !important;
+  scrollbar-width: thin !important;
+}
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--MI_THEME-accent) !important;
+  border-radius: 6px !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--MI_THEME-buttonGradateB) !important;
+}
+
+/* Effet glow sur les titres */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--MI_THEME-accent) !important;
+  text-shadow: 0 0 16px var(--MI_THEME-accent), 0 0 2px #fff !important;
+  letter-spacing: 1px !important;
+}
+
+/* Avatars, images, PDP : ne pas casser ! */
+img, .avatar, .pdp, .user-avatar, .icon, svg {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Inputs et champs texte */
+input, textarea, select, option {
+  background: var(--MI_THEME-panel) !important;
+  color: var(--MI_THEME-navFg) !important;
+  border: 1.5px solid var(--MI_THEME-inputBorder) !important;
+  border-radius: var(--MI-radius) !important;
+  box-shadow: none !important;
+  transition: border 0.2s !important;
+}
+input:focus, textarea:focus, select:focus {
+  border: 1.5px solid var(--MI_THEME-accent) !important;
+  outline: none !important;
+}
+
+/* Effet de cœur (optionnel, à activer avec la classe .hearts-active sur le body) */
+body.hearts-active .heart-cursor {
+  display: block;
+}
+.heart-cursor {
+  position: absolute;
+  width: 24px; height: 24px;
+  background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+  pointer-events: none;
+  animation: pop 1s forwards;
+  z-index: 9999;
+  display: none;
+}
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Animation d'apparition douce */
+.panel, .card, .box, .glass, .glass-panel, .glass-box, .menu, .popup, .dropdown, .modal {
+  animation: fadeInYandere 0.7s cubic-bezier(.4,2,.6,1) both;
+  box-shadow: 0 4px 24px 0 var(--MI_THEME-shadow) !important;
+  border-radius: var(--MI-radius) !important;
+  background: rgba(255,255,255,0.01); /* effet glass subtil */
+}
+@keyframes fadeInYandere {
+  0% { opacity: 0; transform: translateY(24px) scale(0.98); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* Thème Yandere pour Sharkey */
+.theme-yandere, :root {
+  --main-color: #ff4f9d;
+  --accent-color: #fff0f6;
+  --background-color: #fff0f6;
+  --panel-bg-color: #ffe4ec;
+  --box-bg-color: #fff;
+  --sidebar-bg-color: #ffb3c6;
+  --text-color: #b8004f;
+  --hover-color: #ffb3c6;
+  --border-color: #ff4f9d;
+  --heart-color: #ff4f9d;
+  --radius: 12px;
+  --margin: 16px;
+  --avatar: 48px;
+  --thread-width: 2px;
+}
+
+body.theme-yandere, .theme-yandere body {
+  background: var(--background-color) !important;
+  color: var(--text-color) !important;
+  font-family: 'Lexend', 'Hiragino Maru Gothic Pro', 'BIZ UDGothic', Roboto, HelveticaNeue, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.theme-yandere .sidebar, 
+.theme-yandere .navbar, 
+.theme-yandere .footer {
+  background: var(--sidebar-bg-color) !important;
+}
+
+.theme-yandere .panel, 
+.theme-yandere .card, 
+.theme-yandere .box {
+  background: var(--box-bg-color) !important;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.theme-yandere a {
+  color: var(--main-color);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.theme-yandere a:hover {
+  color: var(--hover-color);
+  text-shadow: 0 0 8px var(--main-color);
+  text-decoration: underline;
+}
+
+.theme-yandere hr {
+  margin: var(--margin) 0;
+  border: none;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.theme-yandere .username, 
+.theme-yandere .mention {
+  background: linear-gradient(90deg, #ff4f9d, #b8004f, #ffb3c6, #fff0f6, #ff4f9d);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  animation: yandere-multicolor 3s infinite alternate;
+}
+@keyframes yandere-multicolor {
+  0% { color: #ff4f9d; }
+  25% { color: #b8004f; }
+  50% { color: #ffb3c6; }
+  75% { color: #fff0f6; }
+  100% { color: #ff4f9d; }
+}
+
+.theme-yandere ._buttonPrimary, 
+.theme-yandere .MkButton-root-baFh.MkButton-primary-2hCn.MkButton-rounded-lA8v {
+  color: var(--text-color);
+  background: var(--main-color);
+  border-radius: var(--radius);
+  padding: 10px;
+  box-shadow: none;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.theme-yandere ._buttonPrimary:not(:disabled):hover, 
+.theme-yandere .MkButton-root-baFh.MkButton-primary-2hCn.MkButton-rounded-lA8v:not(:disabled):hover {
+  background: var(--hover-color);
+}
+.theme-yandere ._buttonPrimary:not(:disabled):active, 
+.theme-yandere .MkButton-root-baFh.MkButton-primary-2hCn.MkButton-rounded-lA8v:not(:disabled):active {
+  background: var(--border-color);
+}
+
+.theme-yandere .navbar-instanceIcon-rr1h {
+  content: url('https://image.pngaaa.com/212/738212-middle.png');
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: auto;
+}
+
+.theme-yandere ._shadow {
+  box-shadow: 0px 4px 32px var(--main-color) !important;
+}
+
+.theme-yandere .bdi.block {
+  display: block;
+}
+
+.theme-yandere ._mfm_blur_ {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.theme-yandere ._mfm_blur_:hover {
+  filter: blur(0px);
+}
+
+/* Effet de cœur (optionnel, à activer avec la classe .hearts-active sur le body) */
+body.theme-yandere.hearts-active .heart-cursor {
+  display: block;
+}
+.heart-cursor {
+  position: absolute;
+  width: 24px; height: 24px;
+  background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+  pointer-events: none;
+  animation: pop 1s forwards;
+  z-index: 9999;
+  display: none;
+}
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Correction ciblée pour les boutons de la navbar et similaires */
+._button.navbar-post-plJN,
+._button[class*="navbar-post"],
+button[class*="navbar-post"],
+._button[class*="navbar-"],
+button[class*="navbar-"],
+._button[class*="sidebar-"],
+button[class*="sidebar-"],
+._button[class*="-action"],
+button[class*="-action"] {
+  background: linear-gradient(90deg, var(--main-color), var(--hover-color)) !important;
+  color: var(--text-color) !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 2px 12px 0 rgba(224,58,126,0.12) !important;
+  font-weight: bold !important;
+  letter-spacing: 0.5px !important;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.1s !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+/* Hover */
+._button.navbar-post-plJN:hover,
+._button[class*="navbar-post"]:hover,
+button[class*="navbar-post"]:hover,
+._button[class*="navbar-"]:hover,
+button[class*="navbar-"]:hover,
+._button[class*="sidebar-"]:hover,
+button[class*="sidebar-"]:hover,
+._button[class*="-action"]:hover,
+button[class*="-action"]:hover {
+  background: linear-gradient(90deg, var(--hover-color), var(--main-color)) !important;
+  box-shadow: 0 4px 24px 0 var(--main-color) !important;
+  transform: scale(1.04) !important;
+}
+
+/* Active & Focus */
+._button.navbar-post-plJN:active, ._button.navbar-post-plJN:focus,
+._button[class*="navbar-post"]:active, ._button[class*="navbar-post"]:focus,
+button[class*="navbar-post"]:active, button[class*="navbar-post"]:focus,
+._button[class*="navbar-"]:active, ._button[class*="navbar-"]:focus,
+button[class*="navbar-"]:active, button[class*="navbar-"]:focus,
+._button[class*="sidebar-"]:active, ._button[class*="sidebar-"]:focus,
+button[class*="sidebar-"]:active, button[class*="sidebar-"]:focus,
+._button[class*="-action"]:active, ._button[class*="-action"]:focus,
+button[class*="-action"]:active, button[class*="-action"]:focus {
+  background: var(--border-color) !important;
+  color: var(--text-color) !important;
+  transform: scale(0.98) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--main-color) !important;
+}
+
+/* Désactivé */
+._button.navbar-post-plJN:disabled,
+._button[class*="navbar-post"]:disabled,
+button[class*="navbar-post"]:disabled,
+._button[class*="navbar-"]:disabled,
+button[class*="navbar-"]:disabled,
+._button[class*="sidebar-"]:disabled,
+button[class*="sidebar-"]:disabled,
+._button[class*="-action"]:disabled,
+button[class*="-action"]:disabled {
+  background: #333 !important;
+  color: #888 !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Boutons principaux Misskey/Sharkey */
+._buttonPrimary, .MkButton-root-baFh.primary, ._buttonGradate, .MkButton-root-baFh.gradate {
+  background: linear-gradient(90deg, var(--MI_THEME-buttonGradateA), var(--MI_THEME-buttonGradateB)) !important;
+  color: var(--MI_THEME-fgOnAccent) !important;
+  border: none !important;
+  font-weight: bold !important;
+  box-shadow: 0 2px 12px 0 var(--MI_THEME-shadow) !important;
+  border-radius: var(--MI-radius) !important;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.1s !important;
+}
+
+._buttonPrimary:not(:disabled):hover, .MkButton-root-baFh.primary:not(:disabled):hover, ._buttonGradate:not(:disabled):hover, .MkButton-root-baFh.gradate:not(:disabled):hover {
+  background: linear-gradient(90deg, var(--MI_THEME-buttonGradateB), var(--MI_THEME-buttonGradateA)) !important;
+  box-shadow: 0 4px 24px 0 var(--MI_THEME-accent) !important;
+  transform: scale(1.04) !important;
+}
+
+._buttonPrimary:not(:disabled):active, .MkButton-root-baFh.primary:not(:disabled):active, ._buttonGradate:not(:disabled):active, .MkButton-root-baFh.gradate:not(:disabled):active {
+  background: var(--MI_THEME-accent) !important;
+  transform: scale(0.98) !important;
+}
+
+._button, .MkButton-root-baFh {
+  color: var(--MI_THEME-accent) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: var(--MI-radius) !important;
+}
+
+._button:disabled, .MkButton-root-baFh:disabled {
+  background: #333 !important;
+  color: #888 !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Correction pour les boutons de la navbar (Note, Widget, etc.) */
+[class*=\"navbar-\"] {
+  background: linear-gradient(90deg, var(--MI_THEME-buttonGradateA), var(--MI_THEME-buttonGradateB)) !important;
+  color: var(--MI_THEME-fgOnAccent) !important;
+  border: none !important;
+  font-weight: bold !important;
+  border-radius: var(--MI-radius-ellipse) !important;
+  box-shadow: 0 2px 12px 0 var(--MI_THEME-shadow) !important;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.1s !important;
+}
+
+[class*=\"navbar-\"]:hover {
+  background: linear-gradient(90deg, var(--MI_THEME-buttonGradateB), var(--MI_THEME-buttonGradateA)) !important;
+  box-shadow: 0 4px 24px 0 var(--MI_THEME-accent) !important;
+  transform: scale(1.04) !important;
+}
+
+[class*=\"navbar-\"]:active {
+  background: var(--MI_THEME-accent) !important;
+  transform: scale(0.98) !important;
+}
+
+/* Hover/active : gradient doux */
+button:not(:disabled):hover, ._button:not(:disabled):hover,
+button.active, ._button.active, button[aria-selected="true"], ._button[aria-selected="true"] {
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9) !important;
+  color: #fff0f6 !important;
+  box-shadow: 0 2px 12px 0 rgba(224,58,126,0.10) !important;
+  border-radius: var(--MI-radius) !important;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+/* État actif/selected : fond doux + contour subtil */
+button.active, ._button.active, button[aria-selected="true"], ._button[aria-selected="true"] {
+  background: #3a204a !important;
+  color: #fff0f6 !important;
+  border: 2px solid #e03a7e !important;
+  box-shadow: 0 0 8px #e03a7e33 !important;
+}
+
+/* Par défaut, fond transparent pour les boutons du menu */
+[class*="navbar-"]::before,
+[class*="sidebar-"]::before,
+[class*="item"]::before,
+[class*="post"]::before {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  content: "" !important;
+  transition: background 0.2s;
+}
+
+/* Fond rose/gradient UNIQUEMENT sur actif/hover */
+[class*="navbar-"].active::before,
+[class*="navbar-"][aria-selected="true"]::before,
+[class*="navbar-"]:hover::before,
+[class*="sidebar-"].active::before,
+[class*="sidebar-"][aria-selected="true"]::before,
+[class*="sidebar-"]:hover::before,
+[class*="item"].active::before,
+[class*="item"][aria-selected="true"]::before,
+[class*="item"]:hover::before,
+[class*="post"].active::before,
+[class*="post"][aria-selected="true"]::before,
+[class*="post"]:hover::before {
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9) !important;
+  box-shadow: 0 2px 12px 0 rgba(224,58,126,0.10) !important;
+  border-radius: var(--MI-radius) !important;
+  content: "" !important;
+}
+
+/* Boutons du menu latéral : base */
+.navbar-item-6KaV, .navbar-active-7vS5, ._button.navbar-item-6KaV {
+  background: rgba(36, 20, 46, 0.85) !important; /* Violet foncé, légèrement transparent */
+  color: var(--MI_THEME-navFg) !important;
+  border-radius: var(--MI-radius-ellipse) !important;
+  font-weight: bold !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin-bottom: 6px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+/* Inactif : fond violet foncé, texte clair */
+.navbar-item-6KaV:not(.navbar-active-7vS5):not(:hover):not(:active) {
+  background: rgba(36, 20, 46, 0.85) !important;
+  color: var(--MI_THEME-navFg) !important;
+}
+
+/* Hover : fond violet plus clair, texte blanc */
+.navbar-item-6KaV:hover, ._button.navbar-item-6KaV:hover {
+  background: #2a183a !important;
+  color: #fff0f6 !important;
+  box-shadow: 0 2px 8px 0 #e03a7e33 !important;
+}
+
+/* Actif : fond rose, texte blanc, contour subtil */
+.navbar-active-7vS5 {
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9) !important;
+  color: #fff0f6 !important;
+  border: 2px solid #e03a7e !important;
+  box-shadow: 0 0 8px #e03a7e33 !important;
+}
+
+/* Correction du texte trop clair sur fond rose */
+.navbar-active-7vS5 * {
+  color: #fff0f6 !important;
+}
+
+/* Icônes du menu : toujours visibles */
+.navbar-itemIcon-riyS {
+  color: #fff0f6 !important;
+  opacity: 0.9;
+}
+
+[data-v-266c9789] > span:first-child {
+  /* effet pseudo animé */
+  background: linear-gradient(90deg, #e03a7e, #ffb3d9, #e03a7e, #b8004f);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yandere-username-gradient 3s linear infinite;
+  font-weight: bold;
+}
+[data-v-266c9789] > span:last-child {
+  /* effet domaine animé */
+  background: linear-gradient(90deg, #b8004f, #ffb3d9, #e03a7e, #ffb3d9);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yandere-domain-gradient 4s linear infinite;
+  font-weight: normal;
+  opacity: 0.7;
+} 
